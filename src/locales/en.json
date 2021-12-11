@@ -1,0 +1,14 @@
+{
+  "app": {
+    "itemsBars": {
+      "movies": "Movies",
+      "actors": "Actors",
+      "companies": "Companies"
+    }
+  },
+  "views": {
+    "appBars": {
+      "title": "Menu"
+    }
+  }
+}
