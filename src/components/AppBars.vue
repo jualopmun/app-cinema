@@ -15,7 +15,7 @@
         </v-list-item-content>
       </v-list-item>
       <v-list nav>
-        <v-list-item v-for="item in items" :key="item.title" link :to="item.router">
+        <v-list-item v-for="item in items" :key="item.title" link router-link :to="item.router">
           <v-list-item-content>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
@@ -26,20 +26,22 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-main> </v-main>
+    <v-main> 
+      <router-view></router-view>
+    </v-main>
   </v-app>
 </template>
 
 <script>
 export default {
-	name: "AppBars",
+  name: "AppBars",
 
-	props: {
-		items: Array,
-	},
+  props: {
+    items: Array,
+  },
 
-	data: () => ({
-		drawer: null,
-	}),
+  data: () => ({
+    drawer: null,
+  }),
 }
 </script>

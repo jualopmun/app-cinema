@@ -1,37 +1,44 @@
 module.exports = {
-	"env": {
-		"node": true,
-		"es2021": true
-	},
-	"extends": [
-		"eslint:recommended",
-		"plugin:vue/essential"
-	],
-	"parserOptions": {
-		"ecmaVersion": 6,
-		"ecmaFeatures": {
-			"experimentalObjectRestSpread": true
-		}
-	},
-	"plugins": [
-		"vue"
-	],
-	"rules": {
-		"indent": [
-			"error",
-			"tab"
-		],
-		"linebreak-style": [
-			"error",
-			"windows"
-		],
-		"quotes": [
-			"error",
-			"double"
-		],
-		"semi": [
-			"error",
-			"never"
-		]
-	}
+  root: true,
+  env: {
+    node: true,
+  },
+  extends: [
+    "plugin:vue/essential",
+    "eslint:recommended",
+  ],
+  parserOptions: {
+    parser: "babel-eslint",
+  },
+  rules: {
+    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+    indent: [
+      "error", 2,
+      { ignoredNodes: ["TemplateLiteral"] },
+    ],
+    "template-curly-spacing": "off",
+  },
+  overrides: [{
+    files: [
+      "**/__tests__/*.{j,t}s?(x)",
+      "**/tests/unit/**/*.spec.{j,t}s?(x)",
+    ],
+    env: {
+      jest: true,
+    },
+  }],
+  settings: {
+    "import/resolver": {
+      alias: {
+        map: [
+          [""],
+          ["@", "./src"],
+					
+        ],
+        extensions: [".ts", ".js", ".jsx", ".json"],
+      },
+    },
+  },
 }
+  
