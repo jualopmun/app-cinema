@@ -1,6 +1,6 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
-import { MainView, ListMovies, ViewMovie } from "@/views"
+import { MainView, ListMovies, ViewMovie, CreateMovie } from "@/views"
 
 Vue.use(VueRouter)
 
@@ -20,6 +20,10 @@ const routes = [
           id: Number(params.id)
         }),
     
+      },
+      {
+        path: '/newMovie',
+        component: CreateMovie,
       },
 	
     ]
