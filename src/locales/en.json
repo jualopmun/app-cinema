@@ -6,9 +6,17 @@
       "companies": "Companies"
     }
   },
-  "views": {
+  "components": {
     "appBars": {
       "title": "Menu"
+    }
+  },
+  "views": {
+    "viewMovie": {
+      "puntuation": "Puntutation",
+      "duration": "Duration",
+      "actors": "Actors",
+      "genre": "Genre"
     }
   }
 }

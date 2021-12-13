@@ -13,19 +13,19 @@
       <v-col
         md="10"
       >
-        Puntutation:
+        {{$t("views.viewMovie.puntuation")}}:
         {{ movie.imdbRating }}
       </v-col>
        <v-col
         md="16"
       >
-        Duration:
+        {{$t("views.viewMovie.duration")}}:
         {{ movie.duration }}
       </v-col>
       </v-row>
 
       <div class="my-2 text-subtitle-1">
-        Actors
+        {{$t("views.viewMovie.actors")}}:
       </div>
       <v-divider></v-divider>
       <div
@@ -35,7 +35,7 @@
         {{ actor.first_name }} {{ actor.last_name }}
       </div>
       <div class="my-2 text-subtitle-1">
-        Genre
+         {{$t("views.viewMovie.genre")}}
       </div>
       <v-divider></v-divider>
       <div
