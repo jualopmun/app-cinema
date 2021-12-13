@@ -45,6 +45,16 @@ const actions = {
       commit('error', ex);
     }
   },
+  async getMovie({ commit }, id) {
+    commit('loading');
+    try {
+      const { data }  = await Axios.get(`/movies/${id}`);
+      commit('success', [data] );
+    } catch (ex) {
+      console.error('exception occurred retrieving movies', ex);
+      commit('error', ex);
+    }
+  },
 }
 
 const getters = {

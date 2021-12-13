@@ -1,6 +1,6 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
-import { MainView, ListMovies } from "@/views"
+import { MainView, ListMovies, ViewMovie } from "@/views"
 
 Vue.use(VueRouter)
 
@@ -12,6 +12,14 @@ const routes = [
       {
         path: '/movies',
         component: ListMovies,
+      },
+      {
+        path: '/movies/:id',
+        component: ViewMovie,
+        props: ({ params }) => ({
+          id: Number(params.id)
+        }),
+    
       },
 	
     ]

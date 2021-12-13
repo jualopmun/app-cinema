@@ -3,9 +3,9 @@
     <CardComponent
       v-for="(movie, index) in movies"
       :key="`movie-${index}`"
-      :loading="loading"
       :title="movie.title"
       :image="movie.poster"
+      :url="`movies/${movie.id}`"
     >
       <template v-slot:cardText>
         <v-row
@@ -43,7 +43,7 @@ export default {
       movies: 'list',
     }),
     ...mapState({
-      loading: ({ movies: { status } }) => status === MOVIES.LOADING,
+      success: status => status.status === MOVIES.SUCCESS,
     }),
   },
   created() {
