@@ -64,9 +64,19 @@
             color="primary"
             dark 
             fab
+            class="ma-2"
             @click="$router.push({ path: `/newMovie/${movie.id}` })"
           >
             <v-icon>mdi-plus</v-icon>
+          </v-btn>
+           <v-btn  
+            color="error"
+            dark 
+            fab
+            class="ma-2"
+            @click="deleteMovie(movie.id)"
+          >
+            <v-icon>mdi-trash-can-outline</v-icon>
           </v-btn>
         </template>
       </v-speed-dial>
@@ -111,6 +121,16 @@ export default {
       }
       
     },
+    async deleteMovie(id) {
+      try {
+        await Axios.delete(`/movies/${id}`);
+        this.$router.push({ path: '/movies' })
+      } catch(ex) {
+        console.log(`Error deleted movie: ${ex}`);
+      }
+      
+    },
+
   },
 
   async created() {
