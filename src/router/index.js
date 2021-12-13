@@ -22,8 +22,11 @@ const routes = [
     
       },
       {
-        path: '/newMovie',
+        path: '/newMovie/:id?',
         component: CreateMovie,
+        props: ({ params }) => ({
+          id: Number(params.id)
+        }),
       },
 	
     ]

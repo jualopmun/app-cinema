@@ -27,14 +27,14 @@
         "poster": "Poster",
         "genre": "Genre",
         "actors": "Actors",
-        "anyo": "Anyo",
+        "year": "Year",
         "duration": "Duration",
         "imdbRating": "Puntuation"
       },
       "rules": {
         "titleRules":{
           "required": "Title is required",
-          "characters": "Title must be less than 20 characters"
+          "characters": "Title must be less than 50 characters"
         },
         "posterRules": "URL is invalid",
         "imdbRatingRules": "Ranger [1-10]"

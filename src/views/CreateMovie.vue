@@ -7,7 +7,7 @@
     >
       <v-text-field
         v-model="form.title"
-        :counter="20"
+        :counter="50"
         :rules="rules.titleRules"
         :label="$t('views.createMovie.form.title')"
         required
@@ -38,8 +38,8 @@
       ></v-select>
 
       <v-text-field
-        v-model="form.anyo"
-        :label="$t('views.createMovie.form.anyo')"
+        v-model="form.year"
+        :label="$t('views.createMovie.form.year')"
         type="number"
       ></v-text-field>
 
@@ -71,10 +71,15 @@
 <script>
 import Axios from "axios"
 import i18n from "../i18n.js"
+import { mapGetters } from 'vuex';
+
 
 
 export default {
   name: "CreateMovie",
+  props: {
+    id: Number,
+  },
   data: () => ({
     valid: true,
     form: {
@@ -82,7 +87,7 @@ export default {
       poster: null,
       genre: [],
       actors: [],
-      anyo: null,
+      year: null,
       duration: null,
       imdbRating: null,
     },
@@ -93,7 +98,7 @@ export default {
     rules: {
       titleRules: [
         v => !!v || i18n.t('views.createMovie.rules.titleRules.required'),
-        v => (v && v.length <= 20) || i18n.t('views.createMovie.rules.titleRules.characters'),
+        v => (v && v.length <= 50) || i18n.t('views.createMovie.rules.titleRules.characters'),
       ],
       posterRules: [
       // eslint-disable-next-line no-useless-escape
@@ -106,10 +111,26 @@ export default {
     
   }),
 
+  computed: {
+    ...mapGetters({
+      movies: 'list',
+    }),
+    movie(){
+      return this.movies.find((movie) => movie.id === this.id);
+    }
+  },
+
   methods: {
     async send () {
       try {
-        const { data } = await Axios.post('/movies', this.form);
+        let response = null;
+        if (this.form.id) {
+          response = await Axios.patch(`/movies/${this.form.id}`, this.form);
+        } else {
+          response = await Axios.post('/movies', this.form);
+        }
+
+        const { data } = response;
         this.$router.push({ path: `/movies/${data.id}` })
       } catch(ex) {
         console.log(`Error in post movie: ${ex}`);
@@ -127,6 +148,10 @@ export default {
   },
 
   async created() {
+    if(typeof this.movie === 'undefined' && this.id) {
+      await this.$store.dispatch('getMovie', this.id);
+    }
+    this.form = this.movie;
     const { data } = await this.getAuthors();
 
     data.forEach((actor) => {
