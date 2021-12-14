@@ -61,6 +61,7 @@
         :disabled="!valid"
         color="success"
         class="mr-4 my-2"
+        :loading="loading"
         @click="send"
       >
       {{ $t('common.send') }}
@@ -82,6 +83,7 @@ export default {
   },
   data: () => ({
     valid: true,
+    loading: false,
     form: {
       title: null,
       poster: null,
@@ -123,6 +125,7 @@ export default {
   methods: {
     async send () {
       try {
+        this.loading = true;
         let response = null;
         if (this.form.id) {
           response = await Axios.patch(`/movies/${this.form.id}`, this.form);
@@ -148,10 +151,10 @@ export default {
   },
 
   async created() {
-    if(typeof this.movie === 'undefined' && this.id) {
+    if( Number.isInteger(this.id) ) {
       await this.$store.dispatch('getMovie', this.id);
+      this.form = this.movie;
     }
-    this.form = this.movie;
     const { data } = await this.getAuthors();
 
     data.forEach((actor) => {

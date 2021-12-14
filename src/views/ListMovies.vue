@@ -1,6 +1,23 @@
 <template>
  <div class="my-4 mx-md-5 mx-lg-10 mx-xl-10 pa-2 pt-md-0 px-md-4 mt-10 maxw-1750">
-    <v-card>
+    <div class="mt-4" 
+      v-if="loading"
+    >
+      <v-card
+        v-for="i in 10"
+        :key="`divider-${i}`"
+        class="mx-0"
+        tile
+      >
+        <v-skeleton-loader  
+          :key="`loading-${i}`" 
+          type="list-item-three-line">
+        </v-skeleton-loader>
+      </v-card>
+    </div>
+    <v-card
+     v-if="success"
+    >
       <CardComponent
         v-for="(movie, index) in movies"
         :key="`movie-${index}`"
@@ -69,6 +86,7 @@ export default {
     }),
     ...mapState({
       success: status => status.status === MOVIES.SUCCESS,
+      loading: status => status.status === MOVIES.LOADING,
     }),
   },
   created() {

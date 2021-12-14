@@ -11,7 +11,8 @@
   },
   "components": {
     "appBars": {
-      "title": "Menu"
+      "title": "Cinema",
+      "menu": "Menu"
     }
   },
   "views": {

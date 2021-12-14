@@ -1,9 +1,20 @@
 <template>
  <div class="my-4 mx-md-5 mx-lg-10 mx-xl-10 pa-2 pt-md-0 px-md-4 mt-10 maxw-1750">
-    <v-card>
+    <v-skeleton-loader
+      v-if="loading"
+      class="mx-auto"
+      max-width="1000"
+      type="card"
+    >
+    </v-skeleton-loader>
+    <v-card 
+      v-else
+      max-width="1000"
+    >
       <CardComponent
         v-if="success"
         :image="movie.poster"
+        :title="movie.title"
       >
         <template v-slot:cardText>
         <v-row
@@ -99,6 +110,7 @@ export default {
 
   data: () => ({
     authors: [],
+    loading: true,
   }),
   computed: {
     ...mapGetters({
@@ -117,7 +129,7 @@ export default {
       try {
         return await Axios.get(`/actors/${id}`);
       } catch(ex) {
-        console.log(`Error in get autor: ${ex}`);
+        console.log(`Error in get author: ${ex}`);
       }
       
     },
@@ -128,19 +140,18 @@ export default {
       } catch(ex) {
         console.log(`Error deleted movie: ${ex}`);
       }
-      
     },
-
   },
 
   async created() {
     if(this.movies.length === 0) {
       await this.$store.dispatch('getMovie', this.id);
     }
-    this.movie.actors.forEach(async (actor) => {
+    this.movie?.actors.forEach(async (actor) => {
       const { data } = await this.getAuthor(actor);
       this.authors.push(data);
     })
+    this.loading = false;
   }
 }
 </script>

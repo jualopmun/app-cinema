@@ -1,0 +1,45 @@
+{
+    "common": {
+      "send":"enviar"
+    },
+    "app": {
+      "itemsBars": {
+        "movies": "Peliculas",
+        "actors": "Actores",
+        "companies": "Compañias"
+      }
+    },
+    "components": {
+      "appBars": {
+        "title": "Cinema",
+        "menu": "Menú"
+      }
+    },
+    "views": {
+      "viewMovie": {
+        "puntuation": "Puntuación",
+        "duration": "Duración",
+        "actors": "Actores",
+        "genre": "Genero"
+      },
+      "createMovie": {
+        "form": {
+          "title": "Titulo",
+          "poster": "Poster",
+          "genre": "Genero",
+          "actors": "Actores",
+          "year": "Año",
+          "duration": "Duración",
+          "imdbRating": "Puntuación"
+        },
+        "rules": {
+          "titleRules":{
+            "required": "El titulo es obligatorio",
+            "characters": "El titulo debe de tener 50 caracteres"
+          },
+          "posterRules": "La URL es invalido",
+          "imdbRatingRules": "Rango [1-10]"
+        }
+      }
+    }
+  }
